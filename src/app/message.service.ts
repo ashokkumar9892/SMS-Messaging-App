@@ -14,6 +14,12 @@ export class MessageService {
     private messageStore: MessageStoreService
   ) {}
 
+  // getMessages(inOrOut: string) {
+  //   return this.http
+  //     .get(`/api/${inOrOut}`)
+  //     .pipe(map(res => res.json()))
+  //     .pipe(map(objs => objs.map(obj => new Message(obj))));
+  // }
   getMessages(inOrOut: string) {
     return this.http
       .get(`/api/${inOrOut}`)

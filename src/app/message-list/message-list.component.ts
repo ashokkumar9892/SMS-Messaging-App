@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { MessageService } from '../message.service';
 import { Message } from '../models/message.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -15,9 +15,7 @@ export class MessageListComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private route: ActivatedRoute
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.route.data.subscribe((data) => {
       this.messageService.getMessages(data['box']).subscribe((res) => {
         this.messages = res;
@@ -25,4 +23,34 @@ export class MessageListComponent implements OnInit {
       });
     });
   }
+   
+  
+  ngOnInit() {
+    
+  }
+
+  ngDoCheck()  {
+    this.route.data.subscribe((data) => {
+      this.messageService.getMessages(data['box']).subscribe((res) => {
+        
+        if(this.messages.length !== res.length)
+        {
+          this.messages = res;
+          this.loaded = true;
+        }
+
+          res.forEach(element => {
+          let incomingmsg = this.messages.filter(msg =>msg.from === element.from);
+          if(incomingmsg[0].body! == element.body){
+            this.messages = res;
+            this.loaded = true;
+          }
+   
+     });
+
+       
+      });
+    });
+  }
+
 }
