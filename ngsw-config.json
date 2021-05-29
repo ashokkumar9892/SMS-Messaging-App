@@ -1,0 +1,33 @@
+{
+  "index": "/index.html",
+  "assetGroups": [{
+    "name": "A Pattern Solutions",
+    "installMode": "prefetch",
+    "resources": {
+      "files": [
+        "/favicon.ico",
+        "/index.html",
+        "/*.css",
+        "/*.js"
+      ]
+    }
+  }, {
+    "name": "assets",
+    "installMode": "lazy",
+    "updateMode": "prefetch",
+    "resources": {
+      "files": [
+        "/assets/**"
+      ]
+    }
+  }],
+  "dataGroups": [{
+    "name": "API",
+    "urls": ["/api/*"],
+    "cacheConfig": {
+      "maxSize": 5000,
+      "maxAge": "30d",
+      "strategy": "freshness"
+    }
+  }]
+}
